@@ -5,18 +5,27 @@ import java.util.HashMap;
 public class Students {
     private HashMap<String, ArrayList<Integer>> studentGrades = new HashMap<String, ArrayList<Integer>>();
 
+    public Students(){
+    }
     public void addStudent(String name, ArrayList<Integer> grades) throws StudentAlreadyExistsException{
         if(studentGrades.get(name) != null){
             throw new StudentAlreadyExistsException("The student you are trying to add already exists :(");
         } else {
             studentGrades.put(name, grades);
+            System.out.println("Student successfully created!!");
         }
     }
 
-    public void addGrade(String name, Integer newGrade){
+    public void addGrade(String name, Integer newGrade) throws StudentNotFoundException{
         ArrayList<Integer> currentGrade = studentGrades.get(name);
-        currentGrade.add(newGrade);
-        studentGrades.put(name, currentGrade);
+
+        if (currentGrade == null){
+            throw new StudentNotFoundException("The student is not register in the system :(");
+        } else {
+            currentGrade.add(newGrade);
+            studentGrades.put(name, currentGrade);
+            System.out.println("Grade added successfully !!");
+        }
     }
     public void displayStudent(String name) throws StudentNotFoundException{
         ArrayList<Integer> grades = studentGrades.get(name);
