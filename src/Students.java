@@ -7,6 +7,7 @@ public class Students {
 
     public Students(){
     }
+
     public void addStudent(String name, ArrayList<Integer> grades) throws StudentAlreadyExistsException{
         if(studentGrades.get(name) != null){
             throw new StudentAlreadyExistsException("The student you are trying to add already exists :(");
@@ -56,6 +57,6 @@ public class Students {
             gradeCount += n;
         }
 
-        return (double) gradeCount /grades.size();
+        return Math.round((double) gradeCount /grades.size());
     }
 }
